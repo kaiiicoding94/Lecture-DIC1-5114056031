@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kai Huang | Personal Page 🐶</title>
+    <meta name="description" content="Personal single-page website for Kai Huang – with a cute puppy twist!">
+    <!-- Google Fonts: Nunito for round, cute look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Playfair+Display:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+        <div class="card" id="card">
+
+            <!-- Top bar -->
+            <div class="top-bar">
+                <span class="logo">🐶 KH</span>
+                <div class="status">
+                    <span class="dot"></span>
+                    Online
+                </div>
+            </div>
+
+            <!-- Puppy Avatar -->
+            <div class="puppy-avatar">
+                <span class="puppy-emoji" id="puppyEmoji">🐕</span>
+            </div>
+
+            <!-- Hero -->
+            <div class="hero">
+                <p class="greeting" id="greeting">Good Evening</p>
+                <h1 class="name">Kai Huang</h1>
+                <p class="tagline">Personal Portfolio & Space</p>
+            </div>
+
+            <!-- Divider -->
+            <hr class="divider">
+
+            <!-- Clock -->
+            <div class="clock-section">
+                <span id="clock" class="clock">20:22:03</span>
+                <span id="date" class="date">Wednesday, February 25, 2026</span>
+            </div>
+
+            <!-- Divider -->
+            <hr class="divider">
+
+            <!-- Info grid -->
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">📍 Location</span>
+                    <span class="info-value">Taiwan</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">💻 Focus</span>
+                    <span class="info-value">Development</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🟢 Availability</span>
+                    <span class="info-value">Open</span>
+                </div>
+            </div>
+
+            <!-- Puppy Fact -->
+            <div class="puppy-fact" id="puppyFact">
+                🐾 Fun fact: Dogs can smell up to 100,000 times better than humans! 🐾
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2026 Kai Huang</p>
+        </footer>
+    </main>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+
+            // Clock
+            const timeOpts = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', timeOpts);
+
+            // Date
+            const dateOpts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('date').textContent = now.toLocaleDateString('en-US', dateOpts);
+
+            // Greeting with puppy flair
+            const h = now.getHours();
+            let greet = 'Good Evening';
+            if (h < 12) greet = 'Good Morning';
+            else if (h < 18) greet = 'Good Afternoon';
+            document.getElementById('greeting').textContent = greet;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // Puppy emoji rotator
+        const puppyEmojis = ['🐕', '🐶', '🐕‍🦺', '🦮', '🐩', '🐾'];
+        let puppyIndex = 0;
+        function rotatePuppy() {
+            puppyIndex = (puppyIndex + 1) % puppyEmojis.length;
+            const el = document.getElementById('puppyEmoji');
+            el.style.transition = 'transform 0.3s ease';
+            el.style.transform = 'scale(0.8) rotate(-10deg)';
+            setTimeout(() => {
+                el.textContent = puppyEmojis[puppyIndex];
+                el.style.transform = 'scale(1.1) rotate(5deg)';
+                setTimeout(() => {
+                    el.style.transform = 'scale(1) rotate(0deg)';
+                }, 200);
+            }, 200);
+        }
+        setInterval(rotatePuppy, 4000);
+
+        // Puppy facts rotator
+        const puppyFacts = [
+            '🐾 Fun fact: Dogs can smell up to 100,000 times better than humans! 🐾',
+            '🦴 A dog\'s nose print is unique, like a human fingerprint! 🦴',
+            '🐶 Dogs dream just like humans do during sleep! 🐶',
+            '🐾 A wagging tail doesn\'t always mean a happy dog! 🐾',
+            '🦴 Dogs can learn more than 1,000 words! 🦴',
+            '🐶 Puppies are born deaf and blind! 🐶',
+            '🐾 Dogs have three eyelids! 🐾',
+            '🦴 The Basenji is the only breed that can\'t bark! 🦴'
+        ];
+        let factIndex = 0;
+        function rotateFact() {
+            factIndex = (factIndex + 1) % puppyFacts.length;
+            const el = document.getElementById('puppyFact');
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(8px)';
+            setTimeout(() => {
+                el.textContent = puppyFacts[factIndex];
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, 400);
+        }
+        setInterval(rotateFact, 6000);
+
+        // Entrance
+        window.addEventListener('load', () => {
+            document.getElementById('card').classList.add('visible');
+        });
+    </script>
+</body>
+
+</html>
